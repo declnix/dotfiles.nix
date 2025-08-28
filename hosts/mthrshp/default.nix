@@ -47,6 +47,9 @@ in
         "@ed" = true;
         nvim = true;
 
+        # ==> ai tools
+        ai = true;
+
         # ==> scm tools
         github = true;
 
