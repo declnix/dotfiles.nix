@@ -58,7 +58,7 @@ let
       ) (builtins.readDir dir)
     );
 
-  foundConfigs = discoverConfigs ./.;
+  foundConfigs = discoverConfigs ./nix-config;
 
   importPaths = map (c: c.path) foundConfigs;
 

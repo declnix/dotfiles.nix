@@ -28,7 +28,7 @@
             theme = "robbyrussell";
           };
 
-          initExtra = ''
+          initContent = ''
             [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
           '';
 
