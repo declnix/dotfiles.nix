@@ -46,6 +46,7 @@ in
         
         "@ed" = true;
         nvim = true;
+        zsh = true;
 
         # ==> ai tools
         ai = true;

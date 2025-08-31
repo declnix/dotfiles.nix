@@ -25,7 +25,15 @@ in
           };
           enable = true;
         };
+
+        home.sessionVariables = {
+          EDITOR = "nvim";
+        };
       };
+
+    nixos = {
+      environment.variables.EDITOR = "nvim";
+    };
 
     tags = [
       "@ed"
@@ -33,8 +41,7 @@ in
       "nvf"
     ];
 
-    enablePredicate = { host, ... }:
-      host.tags."@ed" && host.tags.nvim;
+    enablePredicate = { host, ... }: host.tags."@ed" && host.tags.nvim;
 
   };
 
