@@ -4,6 +4,7 @@
     home =
       { pkgs, ... }:
       {
+        home.file.".config/opencode".source = ./.;
         home.packages = with pkgs; [ opencode ];
       };
 
