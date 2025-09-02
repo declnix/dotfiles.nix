@@ -1,6 +1,24 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "agent": {
+    "architect": {
+      "model": "{env:OPENCODE_AGENT_ARCHITECT_MODEL}"
+    },
+    "code": {
+      "model": "{env:OPENCODE_AGENT_CODE_MODEL}"
+    },
+    "doc": {
+      "model": "{env:OPENCODE_AGENT_DOC_MODEL}"
+    },
+    "git": {
+      "model": "{env:OPENCODE_AGENT_GIT_MODEL}"
+    },
+    "product": {
+      "model": "{env:OPENCODE_AGENT_PRODUCT_MODEL}"
+    },
+    "review": {
+      "model": "{env:OPENCODE_AGENT_REVIEW_MODEL}"
+    },
     "plan": {
       "disable": true
     },
