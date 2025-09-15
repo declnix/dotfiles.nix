@@ -1,26 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "agent": {
-    "architect": {
-      "model": "openrouter/google/gemini-2.5-pro"
-    },
-    "code": {
-      "model": "openrouter/anthropic/claude-opus-4.1"
-    },
-    "doc": {
-      "model": "openrouter/google/gemini-2.5-pro"
-    },
-    "git": {
-      "model": "openrouter/google/gemini-2.5-flash"
-    },
-    "review": {
-      "model": "openrouter/anthropic/claude-3.5-haiku"
-    },
     "plan": {
-      "disable": true
+      "model": "openrouter/google/gemini-2.5-pro"
     },
     "build": {
-      "disable": true
+      "model": "openrouter/anthropic/claude-opus-4.1"
     }
   },
   "instructions": [
