@@ -1,7 +1,6 @@
 { inputs, lib, ... }:
 
 let
-  # Load all plugin config files from the plugins directory
   pluginFiles = builtins.readDir ./plugins;
 
   pluginConfigs = builtins.attrValues (
@@ -35,14 +34,7 @@ in
       environment.variables.EDITOR = "nvim";
     };
 
-    tags = [
-      "@ed"
-      "nvim"
-      "nvf"
-    ];
-
-    enablePredicate = { host, ... }: host.tags."@ed" && host.tags.nvim;
-
+    tags = [ "editor" ];
   };
 
   nix-config.modules.home-manager = [

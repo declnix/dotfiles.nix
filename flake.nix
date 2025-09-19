@@ -16,46 +16,5 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs =
-    { flake-parts, nixpkgs, ... }@inputs:
-    let
-      # perSystem definition separated for clarity
-      perSystem =
-        { pkgs, system, ... }:
-        {
-          devShells.default = pkgs.mkShell {
-            name = "nix-config";
-            buildInputs = with pkgs; [
-              nixfmt-rfc-style
-              lefthook
-              gnumake
-              zsh
-            ];
-
-            shellHook = ''
-              # Run lefthook install only once per shell session
-              if [[ -d .git &&  -f .lefthook.yml && -z "$_LEFTHOOK_INSTALLED" ]]; then
-                export _LEFTHOOK_INSTALLED=1
-                lefthook install
-              fi
-            '';
-          };
-        };
-
-      inherit (nixpkgs) lib;
-
-      autoload = import ./. { inherit lib inputs nixpkgs; };
-
-      flakeBody = {
-        systems = [ "x86_64-linux" ];
-
-        imports = [ inputs.nix-config-modules.flakeModule ] ++ autoload.importPaths;
-
-        nix-config.homeApps = [ ];
-        nix-config.defaultTags = autoload.tags;
-
-        inherit perSystem;
-      };
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } flakeBody;
+  outputs = inputs: import ./. { inherit inputs; };
 }

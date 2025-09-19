@@ -1,4 +1,5 @@
-{ inputs, ... }:{
+{ inputs, ... }:
+{
   nix-config.apps.nixos-cli = {
     nixos = {
       services.nixos-cli = {

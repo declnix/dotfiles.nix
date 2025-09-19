@@ -86,14 +86,7 @@
         };
       };
 
-    tags = [
-      "@ed"
-      "zsh"
-      "nzf"
-    ];
-
-    enablePredicate = { host, ... }: host.tags."@ed" && host.tags.zsh;
-
+    tags = [ "shell" ];
   };
 
   nix-config.modules.home-manager = [

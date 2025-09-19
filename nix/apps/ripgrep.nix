@@ -6,9 +6,6 @@
       };
     };
 
-    tags = [
-      "tl"
-      "default"
-    ];
+    tags = [ "cli" ];
   };
 }

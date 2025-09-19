@@ -1,82 +1,64 @@
-{
-  lib,
-  inputs,
-  nixpkgs,
-  ...
-}:
-
+{ inputs, ... }:
 let
-  # Import a .nix file, calling it if it's a function
-  importNixFile =
-    path:
-    let
-      raw = import path;
-    in
-    if lib.isFunction raw then
-      raw {
-        inherit inputs lib nixpkgs;
-        pkgs = nixpkgs;
-        modulesPath = "";
-        config = { };
-      }
-    else
-      raw;
+  inherit (inputs) flake-parts;
 
-  # Check if a file's content has nix-config apps or hosts
-  hasNixConfig =
-    content:
-    lib.hasAttrByPath [ "nix-config" "apps" ] content
-    || lib.hasAttrByPath [ "nix-config" "hosts" ] content;
+  perSystem =
+    { pkgs, system, ... }:
+    {
+      devShells.default = pkgs.mkShell {
+        name = "nix-config";
+        buildInputs = with pkgs; [
+          nixfmt-rfc-style
+          lefthook
+          gnumake
+          zsh
+        ];
 
-  # Discover nix-config files recursively in a directory
-  discoverConfigs =
-    dir:
-    lib.flatten (
-      lib.mapAttrsToList (
-        name: type:
-        let
-          fullPath = "${dir}/${name}";
-        in
-        if type == "directory" then
-          discoverConfigs fullPath
-        else if lib.hasSuffix ".nix" name then
-          let
-            content = importNixFile fullPath;
-            configPath = if name == "default.nix" && hasNixConfig content then dir else fullPath;
-          in
-          if hasNixConfig content then
-            [
-              {
-                path = configPath;
-                content = content;
-              }
-            ]
-          else
-            [ ]
-        else
-          [ ]
-      ) (builtins.readDir dir)
-    );
+        shellHook = ''
+          # Run lefthook install only once per shell session
+          if [[ -d .git && -f .lefthook.yml && -z "$_LEFTHOOK_INSTALLED" ]]; then
+            export _LEFTHOOK_INSTALLED=1
+            lefthook install
+          fi
+        '';
+      };
+    };
 
-  foundConfigs = discoverConfigs ./nix-config;
+  flake = {
+    imports = [
+      inputs.nix-config-modules.flakeModule
 
-  importPaths = map (c: c.path) foundConfigs;
+      # ==> apps
+      ./nix/apps/devbox.nix
+      ./nix/apps/direnv.nix
+      ./nix/apps/distrobox.nix
+      ./nix/apps/eza.nix
+      ./nix/apps/fd.nix
+      ./nix/apps/fonts.nix
+      ./nix/apps/fzf.nix
+      ./nix/apps/gh.nix
+      ./nix/apps/git.nix
+      ./nix/apps/nix-index.nix
+      ./nix/apps/nixos-cli.nix
+      ./nix/apps/nzf.nix
+      ./nix/apps/podman.nix
+      ./nix/apps/ripgrep.nix
+      ./nix/apps/sudo.nix
+      ./nix/apps/tmux.nix
+      ./nix/apps/nvf
 
-  hostNames = lib.concatMap (c: lib.attrNames (c.content.nix-config.hosts or { })) foundConfigs;
+      ./nix/defaultTags.nix
 
-  tags = lib.genAttrs (lib.unique (
-    lib.concatMap (
-      conf:
-      lib.concatLists (lib.mapAttrsToList (_: app: app.tags or [ ]) (conf.content.nix-config.apps or { }))
-    ) foundConfigs
-  )) (_: false);
+      # ==> hosts
+      ./nix/hosts/mthrshp
+    ];
+
+    nix-config.homeApps = [ ];
+
+    inherit perSystem;
+
+    systems = [ ];
+  };
 
 in
-{
-  inherit
-    foundConfigs
-    importPaths
-    hostNames
-    tags
-    ;
-}
+flake-parts.lib.mkFlake { inherit inputs; } flake // flake

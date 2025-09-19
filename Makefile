@@ -40,6 +40,11 @@ clean:
 	$(call print_banner,🧹 Cleaning up old generations...)
 	@nixos generation delete --min 3 --older-than 120h -y
 
+vm:
+	$(call print_banner,🖥️ Building VM for $(HOST)...)
+	@nix build .#nixosConfigurations.$(HOSTNAME).config.system.build.vm -o ./result/vm
+	@./result/vm/bin/run-*-vm
+
 ################################################################################
 # 🎨 Code Formatting Commands
 ################################################################################

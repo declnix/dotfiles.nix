@@ -43,10 +43,11 @@ in
         devbox = true;
         docker = true;
         distros = true;
-        
-        "@ed" = true;
-        nvim = true;
-        zsh = true;
+        containers = true;
+
+        cli = true;
+        editor = true;
+        shell = true;
 
         # ==> ai tools
         ai = true;
@@ -65,8 +66,8 @@ in
         ${host} = true;
       };
 
-      nixos = import ./nixos/configuration.nix;
-      home = import ./nixos/home.nix;
+      nixos = import ./configuration.nix;
+      home = import ./home.nix;
     };
   };
 }

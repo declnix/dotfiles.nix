@@ -23,9 +23,6 @@
         };
       };
 
-    tags = [
-      "cntr"
-      "docker"
-    ];
+    tags = [ "containers" ];
   };
 }
