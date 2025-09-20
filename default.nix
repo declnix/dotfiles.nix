@@ -57,7 +57,7 @@ let
 
     inherit perSystem;
 
-    systems = [ ];
+    systems = [ "x86_64-linux" ];
   };
 
 in

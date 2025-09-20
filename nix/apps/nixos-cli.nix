@@ -13,7 +13,7 @@
     ];
   };
 
-  nix-config = {
-    modules.nixos = [ inputs.nixos-cli.nixosModules.nixos-cli ];
-  };
+  nix-config.modules.nixos = [
+    inputs.nixos-cli.nixosModules.nixos-cli
+  ];
 }
