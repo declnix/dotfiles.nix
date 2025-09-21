@@ -46,11 +46,13 @@ let
       ./nix/apps/sudo.nix
       ./nix/apps/tmux.nix
       ./nix/apps/nvf
+      # ./nix/apps.nix
 
       ./nix/defaultTags.nix
 
       # ==> hosts
-      ./nix/hosts/mthrshp
+      ./nix/hosts/blackout
+      # ./nix/hosts/hosts.nix
     ];
 
     nix-config.homeApps = [ ];
