@@ -3,30 +3,34 @@ let
   inherit (inputs) flake-parts;
 
   perSystem =
-    { pkgs, system, ... }:
+    { config
+    , pkgs
+    , system
+    , ...
+    }:
     {
       devShells.default = pkgs.mkShell {
         name = "nix-config";
-        buildInputs = with pkgs; [
-          nixfmt-rfc-style
-          lefthook
-          gnumake
-          zsh
-        ];
+        buildInputs =
+          with pkgs;
+          [
+            gnumake
+            zsh
+          ]
+          ++ config.pre-commit.settings.enabledPackages;
 
         shellHook = ''
-          # Run lefthook install only once per shell session
-          if [[ -d .git && -f .lefthook.yml && -z "$_LEFTHOOK_INSTALLED" ]]; then
-            export _LEFTHOOK_INSTALLED=1
-            lefthook install
-          fi
+          ${config.pre-commit.installationScript}
         '';
       };
+
+      pre-commit.settings.hooks.nixfmt-rfc-style.enable = true;
     };
 
   flake = {
     imports = [
       inputs.nix-config-modules.flakeModule
+      inputs.git-hooks.flakeModule
 
       # ==> apps
       ./nix/apps/devbox.nix

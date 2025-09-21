@@ -1,8 +1,0 @@
-pre-commit:
-  parallel: true
-  commands:
-    formatting:
-      glob: "*.nix"
-      run: |
-        make fmt FILES="{staged_files}"
-        git add {staged_files}
