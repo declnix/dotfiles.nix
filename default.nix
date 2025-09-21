@@ -15,8 +15,8 @@ let
         buildInputs =
           with pkgs;
           [
-            gnumake
             zsh
+            just
           ]
           ++ config.pre-commit.settings.enabledPackages;
 

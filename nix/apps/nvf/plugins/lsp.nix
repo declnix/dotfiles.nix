@@ -1,5 +1,0 @@
-{
-  lsp = {
-    enable = true;
-  };
-}

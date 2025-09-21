@@ -1,3 +1,0 @@
-{
-  tabline.nvimBufferline.enable = true;
-}

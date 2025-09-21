@@ -1,4 +1,0 @@
-{
-  viAlias = false;
-  vimAlias = true;
-}
