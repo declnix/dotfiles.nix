@@ -18,22 +18,31 @@
                 ];
               };
 
-              lazy.plugins.neo-tree-nvim = {
-                keys = [
-                  {
-                    key = "<leader>e";
-                    mode = [ "n" ];
-                    action = ":Neotree source=filesystem reveal=true position=left <CR>";
-                  }
-                ];
+              "fzf-lua".enable = true;
+
+              extraPlugins = {
+                fyler-nvim = {
+                  package = pkgs.vimPlugins.fyler-nvim;
+                  setup = ''
+                    require('fyler').setup {
+                      icon_provider = "nvim_web_devicons" 
+                    };
+                  '';
+                };
               };
 
-              "fzf-lua".enable = true;
+              keymaps = [
+                {
+                  key = "<leader>e";
+                  mode = [ "n" ];
+                  action = ":Fyler kind=split:leftmost<CR>";
+                }
+              ];
+
+              visuals.nvim-web-devicons.enable = true;
 
               viAlias = true;
               vimAlias = true;
-
-              filetree.neo-tree.enable = true;
 
               lsp = {
                 enable = true;
@@ -72,6 +81,16 @@
       "editors"
       "tui"
     ];
+
+    nixpkgs = {
+      params.overlays = [
+        (final: prev: {
+          vimPlugins = prev.vimPlugins // {
+            fyler-nvim = (import inputs.nixpkgs-unstable { system = final.system; }).vimPlugins.fyler-nvim;
+          };
+        })
+      ];
+    };
   };
 
   nix-config.modules.home-manager = [

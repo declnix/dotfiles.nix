@@ -8,19 +8,19 @@ switch: $(IMPORTS_FILE)
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "> ⚡ Applying system configuration to .#$(HOSTNAME)..."
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@nixos-rebuild switch --flake .#$(HOSTNAME)
+	@sudo nixos-rebuild switch --flake .#$(HOSTNAME)
 
 build: $(IMPORTS_FILE)
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "> ⚙️ Building configuration to ./result for .#$(HOSTNAME)..."
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@nixos-rebuild build --flake .#$(HOSTNAME)
+	@sudo nixos-rebuild build --flake .#$(HOSTNAME)
 
 boot: $(IMPORTS_FILE)
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "> 🚀 Building configuration for next boot for .#$(HOSTNAME)..."
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@nixos-rebuild boot --flake .#$(HOSTNAME)
+	@sudo nixos-rebuild boot --flake .#$(HOSTNAME)
 
 clean:
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

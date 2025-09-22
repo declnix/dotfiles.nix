@@ -3,11 +3,12 @@ let
   inherit (inputs) flake-parts;
 
   perSystem =
-    { config
-    , self'
-    , pkgs
-    , system
-    , ...
+    {
+      config,
+      self',
+      pkgs,
+      system,
+      ...
     }:
     {
       devShells.default = pkgs.mkShell {
