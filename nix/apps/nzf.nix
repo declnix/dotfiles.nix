@@ -1,5 +1,5 @@
+# @auto-import
 { inputs, lib, ... }:
-
 {
   nix-config.apps.nzf = {
     home =

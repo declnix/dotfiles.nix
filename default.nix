@@ -17,6 +17,7 @@ let
           [
             zsh
             just
+            gnumake
           ]
           ++ config.pre-commit.settings.enabledPackages;
 
@@ -26,13 +27,15 @@ let
       };
 
       pre-commit.settings.hooks.nixfmt-rfc-style.enable = true;
+
+      formatter = pkgs.nixfmt-rfc-style;
     };
 
   flake = {
     imports = [
       inputs.nix-config-modules.flakeModule
       inputs.git-hooks.flakeModule
-      ./nix/autoload.nix
+      ./imports.nix
     ];
 
     nix-config.homeApps = [ ];

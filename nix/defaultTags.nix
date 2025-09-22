@@ -1,3 +1,4 @@
+# @auto-import
 { lib, config, ... }:
 
 let
@@ -7,9 +8,11 @@ let
 in
 {
   nix-config.defaultTags = builtins.listToAttrs (
-    map (t: {
-      name = t;
-      value = lib.mkDefault false;
-    }) allTags
+    map
+      (t: {
+        name = t;
+        value = lib.mkDefault false;
+      })
+      allTags
   );
 }

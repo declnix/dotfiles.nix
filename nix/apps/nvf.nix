@@ -1,3 +1,4 @@
+# @auto-import
 { inputs, ... }:
 {
   nix-config.apps.nvf = {

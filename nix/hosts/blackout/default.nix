@@ -1,3 +1,4 @@
+# @auto-import
 { lib, ... }:
 let
   host = "blackout";

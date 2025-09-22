@@ -1,3 +1,4 @@
+# @auto-import
 {
   nix-config.apps.podman = {
     nixos =
