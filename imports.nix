@@ -2,7 +2,6 @@
   imports = [
     ./nix/apps/direnv.nix
     ./nix/apps/nvf.nix
-    ./nix/apps/nixos-cli.nix
     ./nix/apps/tmux.nix
     ./nix/apps/distrobox.nix
     ./nix/apps/nzf.nix
