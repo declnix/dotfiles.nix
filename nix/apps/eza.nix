@@ -13,6 +13,9 @@
       };
     };
 
-    tags = [ "cli" ];
+    tags = [
+      "utils"
+      "cli"
+    ];
   };
 }

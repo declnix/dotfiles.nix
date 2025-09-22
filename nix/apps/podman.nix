@@ -24,6 +24,9 @@
         };
       };
 
-    tags = [ "containers" ];
+    tags = [
+      "containers"
+      "cli"
+    ];
   };
 }

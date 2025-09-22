@@ -67,7 +67,11 @@
       environment.variables.EDITOR = "nvim";
     };
 
-    tags = [ "editor" ];
+    tags = [
+      "development"
+      "editors"
+      "tui"
+    ];
   };
 
   nix-config.modules.home-manager = [

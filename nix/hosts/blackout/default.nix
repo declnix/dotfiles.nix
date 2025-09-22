@@ -32,18 +32,17 @@ in
   };
 
   nix-config.hosts.${host} = {
-    kind = "nixos";
-    system = "x86_64-linux";
-
-    username = user;
-    homeDirectory = "/home/${user}";
-
     tags = {
-      # ==> development tools
-      devbox = true;
-      docker = true;
-      distros = true;
+      # ==> general groups
+      development = true;
       containers = true;
+      shells = true;
+      utils = true;
+
+      direnv = true;
+
+      # ==> development tools
+      distros = true;
 
       cli = true;
       editor = true;
@@ -68,5 +67,11 @@ in
 
     nixos = import ./configuration.nix;
     home = import ./home.nix;
+
+    kind = "nixos";
+    system = "x86_64-linux";
+
+    username = user;
+    homeDirectory = "/home/${user}";
   };
 }

@@ -8,6 +8,6 @@
         home.packages = with pkgs; [ devbox ];
       };
 
-    tags = [ "devbox" ];
+    tags = [ "development" ];
   };
 }

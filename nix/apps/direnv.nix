@@ -10,8 +10,7 @@
     };
 
     tags = [
-      "tl"
-      "default"
+      "development"
     ];
   };
 }

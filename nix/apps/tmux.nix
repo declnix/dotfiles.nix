@@ -47,8 +47,7 @@
       };
 
     tags = [
-      "@mux"
-      "default"
+      "shells"
     ];
   };
 }

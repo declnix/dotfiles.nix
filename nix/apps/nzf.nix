@@ -86,7 +86,7 @@
         };
       };
 
-    tags = [ "shell" ];
+    tags = [ "shells" ];
   };
 
   nix-config.modules.home-manager = [
