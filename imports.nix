@@ -17,7 +17,7 @@
     ./nix/apps/ripgrep.nix
     ./nix/apps/fonts.nix
     ./nix/hosts/blackout/default.nix
-    ./nix/hosts/blackparcel/default.nix
+    ./nix/hosts/bealish/default.nix
     ./nix/defaultTags.nix
   ];
 }

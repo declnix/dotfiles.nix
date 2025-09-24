@@ -1,7 +1,7 @@
 # @auto-import
 { inputs, lib, ... }:
 let
-  host = "blackparcel";
+  host = "bealish";
   user = "nixos";
 
 in
