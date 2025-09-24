@@ -1,23 +1,23 @@
 {
   imports = [
-    ./nix/apps/devbox.nix
-    ./nix/apps/fd.nix
-    ./nix/apps/git.nix
-    ./nix/apps/nvf.nix
-    ./nix/apps/eza.nix
-    ./nix/apps/tmux.nix
-    ./nix/apps/podman.nix
-    ./nix/apps/fzf.nix
-    ./nix/apps/distrobox.nix
-    ./nix/apps/sudo.nix
     ./nix/apps/direnv.nix
+    ./nix/apps/nvf.nix
+    ./nix/apps/tmux.nix
+    ./nix/apps/distrobox.nix
     ./nix/apps/nzf.nix
-    ./nix/apps/gh.nix
+    ./nix/apps/sudo.nix
+    ./nix/apps/fonts.nix
+    ./nix/apps/eza.nix
     ./nix/apps/nix-index.nix
     ./nix/apps/ripgrep.nix
-    ./nix/apps/fonts.nix
-    ./nix/hosts/blackout/default.nix
+    ./nix/apps/gh.nix
+    ./nix/apps/devbox.nix
+    ./nix/apps/podman.nix
+    ./nix/apps/git.nix
+    ./nix/apps/fd.nix
+    ./nix/apps/fzf.nix
     ./nix/hosts/bealish/default.nix
+    ./nix/hosts/dreadfort/default.nix
     ./nix/defaultTags.nix
   ];
 }

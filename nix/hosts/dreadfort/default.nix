@@ -1,7 +1,7 @@
 # @auto-import
 { lib, ... }:
 let
-  host = "blackout";
+  host = "dreadfort";
   user = "yehvaed";
 
 in
