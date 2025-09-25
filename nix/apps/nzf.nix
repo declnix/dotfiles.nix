@@ -1,4 +1,4 @@
-# @auto-import
+# @nix-config-modules
 { inputs, lib, ... }:
 {
   nix-config.apps.nzf = {

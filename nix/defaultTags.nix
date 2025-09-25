@@ -1,4 +1,4 @@
-# @auto-import
+# @nix-config-modules
 { lib, config, ... }:
 
 let

@@ -1,4 +1,4 @@
-# @auto-import
+# @nix-config-modules
 { inputs, lib, ... }:
 let
   host = "bealish";

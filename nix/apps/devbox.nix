@@ -1,4 +1,4 @@
-# @auto-import
+# @nix-config-modules
 { lib, ... }:
 {
   nix-config.apps.devbox = {

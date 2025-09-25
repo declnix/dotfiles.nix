@@ -3,7 +3,7 @@ let
   inherit (inputs) flake-parts;
 
   modules = [
-    # /imports :: grep -rl '# @auto-import' nix | sed 's|^|./|'
+    # /imports :: grep -rl '# @nix-config-modules' nix | sed 's|^|./|'
     ./nix/apps/devbox.nix
     ./nix/apps/fd.nix
     ./nix/apps/git.nix

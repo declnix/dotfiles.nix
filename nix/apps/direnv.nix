@@ -1,4 +1,4 @@
-# @auto-import
+# @nix-config-modules
 {
   nix-config.apps.direnv = {
     home = {
