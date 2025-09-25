@@ -5,6 +5,12 @@
     home =
       { pkgs, ... }:
       {
+        imports = [
+          # /imports :: find . -iname '*.nix' | grep -v nvf.nix
+          ./languages/markdown.nix
+          # /imports
+        ];
+
         programs.nvf = {
           settings = {
             vim = {
@@ -40,6 +46,10 @@
               ];
 
               visuals.nvim-web-devicons.enable = true;
+
+              languages = {
+                enableTreesitter = true;
+              };
 
               viAlias = true;
               vimAlias = true;

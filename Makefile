@@ -1,22 +1,21 @@
 # 🚀 System Deployment Commands
 
 HOSTNAME ?= $(shell hostname)
-IMPORTS_FILE := imports.nix
 
 # All targets now depend on imports.nix
-switch: $(IMPORTS_FILE)
+switch: markers
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "> ⚡ Applying system configuration to .#$(HOSTNAME)..."
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@sudo nixos-rebuild switch --flake .#$(HOSTNAME)
 
-build: $(IMPORTS_FILE)
+build: markers
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "> ⚙️ Building configuration to ./result for .#$(HOSTNAME)..."
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@sudo nixos-rebuild build --flake .#$(HOSTNAME)
 
-boot: $(IMPORTS_FILE)
+boot: markers
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo "> 🚀 Building configuration for next boot for .#$(HOSTNAME)..."
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -36,13 +35,8 @@ fmt:
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@nixfmt "**/*.nix"
 
-# 📦 Generate imports.nix automatically (must be last)
-.PHONY: $(IMPORTS_FILE)
-$(IMPORTS_FILE):
-	@echo "{ " > $(IMPORTS_FILE)
-	@echo "  imports = [" >> $(IMPORTS_FILE)
-	@grep -rl '# @auto-import' nix | while read f; do \
-	    echo "    ./$$f" >> $(IMPORTS_FILE); \
-	done
-	@echo "  ];" >> $(IMPORTS_FILE)
-	@echo "}" >> $(IMPORTS_FILE)
+markers:
+	@changed_files=$$(./utils/markers.sh); \
+	if [ -n "$$changed_files" ]; then \
+	  echo "$$changed_files" | xargs git add; \
+	fi

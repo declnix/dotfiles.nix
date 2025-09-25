@@ -2,6 +2,31 @@
 let
   inherit (inputs) flake-parts;
 
+  modules = [
+    # /imports :: grep -rl '# @auto-import' nix | sed 's|^|./|'
+    ./nix/apps/devbox.nix
+    ./nix/apps/fd.nix
+    ./nix/apps/git.nix
+    ./nix/apps/nvf/nvf.nix
+    ./nix/apps/eza.nix
+    ./nix/apps/tmux.nix
+    ./nix/apps/podman.nix
+    ./nix/apps/fzf.nix
+    ./nix/apps/vscode-server.nix
+    ./nix/apps/distrobox.nix
+    ./nix/apps/sudo.nix
+    ./nix/apps/direnv.nix
+    ./nix/apps/nzf.nix
+    ./nix/apps/gh.nix
+    ./nix/apps/nix-index.nix
+    ./nix/apps/ripgrep.nix
+    ./nix/apps/fonts.nix
+    ./nix/hosts/dreadfort/default.nix
+    ./nix/hosts/bealish/default.nix
+    ./nix/defaultTags.nix
+    # /imports
+  ];
+
   perSystem =
     {
       config,
@@ -36,8 +61,8 @@ let
     imports = [
       inputs.nix-config-modules.flakeModule
       inputs.git-hooks.flakeModule
-      ./imports.nix
-    ];
+    ]
+    ++ modules;
 
     nix-config.homeApps = [ ];
 
