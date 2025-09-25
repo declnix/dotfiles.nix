@@ -37,6 +37,8 @@
             bind -T root M-w choose-tree 
 
             set-option -g default-shell ${pkgs.zsh}/bin/zsh
+            set -g default-terminal "tmux-256color"
+            set -ga terminal-overrides ",xterm-256color:Tc"
           '';
 
           terminal = "tmux-256color";
