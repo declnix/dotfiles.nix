@@ -31,6 +31,7 @@
     nvf.url = "github:notashelf/nvf";
     nzf.url = "github:yehvaed/nzf";
     git-hooks.url = "github:cachix/git-hooks.nix";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
   outputs = inputs: import ./. { inherit inputs; };

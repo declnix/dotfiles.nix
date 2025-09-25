@@ -60,6 +60,7 @@ in
         cli = true;
         editor = true;
         shell = true;
+        wsl = true;
 
         # ==> ai tools
         ai = true;
