@@ -21,6 +21,7 @@
 
       # ==> desktop
       kde = true;
+      niri = true;
     };
 
     nixos = import ./configuration.nix;

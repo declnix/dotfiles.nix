@@ -14,6 +14,7 @@ let
     apps/gh.nix
     apps/git.nix
     apps/kde.nix
+    apps/niri.nix
     apps/nix-index.nix
     apps/nvf/nvf.nix
     apps/nzf.nix
