@@ -9,31 +9,18 @@
     homeDirectory = "/home/${username}";
 
     tags = {
-      # ==> general groups
+      # ==> apps for development
       development = true;
       containers = true;
-      shells = true;
-      utils = true;
 
-      direnv = true;
+      # ==> policies
+      passwordless = true;
 
-      # ==> development tools
-      distros = true;
-
-      cli = true;
-      editor = true;
-      shell = true;
-      wsl = true;
-
-      # ==> ai tools
-      ai = true;
-
-      # ==> scm tools
-      github = true;
+      # == ui, styles
+      appearance = true;
 
       # ==> misc
-      nerd-fonts = true;
-      # displaylink = true;
+      wsl = true;
     };
 
     nixos = import ./configuration.nix;

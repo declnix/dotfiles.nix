@@ -26,7 +26,6 @@
 
     tags = [
       "containers"
-      "cli"
     ];
   };
 }

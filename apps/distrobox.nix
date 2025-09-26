@@ -8,8 +8,7 @@
     };
 
     tags = [
-      "cntr"
-      "distros"
+      "unknown"
     ];
   };
 }

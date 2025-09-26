@@ -1,6 +1,8 @@
 # @nix-config-modules
 {
   nix-config.apps.eza = {
+    enable = true;
+
     home = {
       programs.eza = {
         extraOptions = [ "--group-directories-first" ];
@@ -12,10 +14,5 @@
         enable = true;
       };
     };
-
-    tags = [
-      "utils"
-      "cli"
-    ];
   };
 }

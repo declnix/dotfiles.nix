@@ -49,7 +49,7 @@
       };
 
     tags = [
-      "shells"
+      "development"
     ];
   };
 }

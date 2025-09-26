@@ -16,7 +16,7 @@
 
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  networking.hostName = lib.mkForce "blackout";
+  networking.hostName = lib.mkForce "dreadfort";
   time.timeZone = "Europe/Warsaw";
 
   users.users.yehvaed = {

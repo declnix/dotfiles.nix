@@ -6,6 +6,6 @@
       security.sudo.wheelNeedsPassword = false;
     };
 
-    tags = [ "default" ];
+    tags = [ "passwordless" ];
   };
 }

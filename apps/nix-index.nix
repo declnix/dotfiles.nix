@@ -2,16 +2,13 @@
 { inputs, ... }:
 {
   nix-config.apps.nix-index = {
+    enable = true;
+
     nixos =
       { pkgs, ... }:
       {
         programs.nix-index-database.comma.enable = true;
       };
-
-    tags = [
-      "nix"
-      "default"
-    ];
   };
 
   nix-config.modules.nixos = [

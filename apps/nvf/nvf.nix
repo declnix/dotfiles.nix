@@ -39,8 +39,6 @@
 
     tags = [
       "development"
-      "editors"
-      "tui"
     ];
 
     nixpkgs = {

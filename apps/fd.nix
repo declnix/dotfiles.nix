@@ -1,15 +1,12 @@
 # @nix-config-modules
 {
   nix-config.apps.fd = {
+    enable = true;
+
     home = {
       programs.fd = {
         enable = true;
       };
     };
-
-    tags = [
-      "utils"
-      "cli"
-    ];
   };
 }

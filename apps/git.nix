@@ -10,8 +10,7 @@
         };
       };
     tags = [
-      "scm"
-      "github"
+      "development"
     ];
   };
 }

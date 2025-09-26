@@ -7,6 +7,6 @@
         fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
       };
 
-    tags = [ "nerd-fonts" ];
+    tags = [ "appearance" ];
   };
 }

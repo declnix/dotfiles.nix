@@ -33,36 +33,19 @@ in
 
   nix-config.hosts.${host} = {
     tags = {
-      # ==> general groups
+      # ==> apps for development
       development = true;
       containers = true;
-      shells = true;
-      utils = true;
 
-      direnv = true;
+      # ==> policies
+      passwordless = true;
 
-      # ==> development tools
-      distros = true;
-
-      cli = true;
-      editor = true;
-      shell = true;
-
-      # ==> ai tools
-      ai = true;
-
-      # ==> scm tools
-      github = true;
-
-      # ==> misc
-      nerd-fonts = true;
-      # displaylink = true;
-
-      # ==> default apps
-      default = true;
+      # == ui, styles
+      appearance = true;
 
       # ==> host specific overrides
       ${host} = true;
+
     };
 
     nixos = import ./configuration.nix;
