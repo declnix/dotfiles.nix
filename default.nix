@@ -3,26 +3,27 @@ let
   inherit (inputs) flake-parts;
 
   modules = [
-    # /imports :: grep -rl '# @nix-config-modules' | grep -E 'apps|hosts'
+    # /imports :: grep -rl '# @nix-config-modules' | grep -E 'apps|hosts' | sort
     apps/devbox.nix
-    apps/fd.nix
-    apps/git.nix
-    apps/nvf/nvf.nix
-    apps/eza.nix
-    apps/tmux.nix
-    apps/podman.nix
-    apps/fzf.nix
-    apps/vscode-server.nix
-    apps/distrobox.nix
-    apps/sudo.nix
     apps/direnv.nix
-    apps/nzf.nix
-    apps/gh.nix
-    apps/nix-index.nix
-    apps/ripgrep.nix
+    apps/distrobox.nix
+    apps/eza.nix
+    apps/fd.nix
     apps/fonts.nix
-    hosts/dreadfort/default.nix
+    apps/fzf.nix
+    apps/gh.nix
+    apps/git.nix
+    apps/kde.nix
+    apps/nix-index.nix
+    apps/nvf/nvf.nix
+    apps/nzf.nix
+    apps/podman.nix
+    apps/ripgrep.nix
+    apps/sudo.nix
+    apps/tmux.nix
+    apps/vscode-server.nix
     hosts/bealish/default.nix
+    hosts/dreadfort/default.nix
     # /imports
   ];
 

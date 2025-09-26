@@ -6,11 +6,11 @@
       { pkgs, ... }:
       {
         imports = [
-          # /imports :: find . -iname '*.nix' | grep -Ev '(nvf|overlay)\.nix'
-          ./plugins/fzf-lua.nix
-          ./plugins/fyler.nix
-          ./config/ui.nix
+          # /imports :: find . -iname '*.nix' | grep -Ev '(nvf|overlay)\.nix' | sort
           ./config/languages/markdown.nix
+          ./config/ui.nix
+          ./plugins/fyler.nix
+          ./plugins/fzf-lua.nix
           # /imports
         ];
 

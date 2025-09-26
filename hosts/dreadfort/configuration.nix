@@ -1,4 +1,5 @@
 {
+  host,
   config,
   lib,
   pkgs,
@@ -16,18 +17,22 @@
 
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  networking.hostName = lib.mkForce "dreadfort";
+  networking.hostName = lib.mkForce "${host.name}";
   time.timeZone = "Europe/Warsaw";
 
-  users.users.yehvaed = {
+  users.users.${host.username} = {
     isNormalUser = true;
 
-    home = "/home/yehvaed";
+    home = "/home/${host.username}";
     extraGroups = [
       "wheel"
       "networkmanager"
     ];
+
+    shell = pkgs.zsh;
   };
+
+  programs.zsh.enable = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

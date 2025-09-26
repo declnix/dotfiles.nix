@@ -19,7 +19,7 @@
   wsl.enable = true;
   wsl.defaultUser = "${host.username}";
   programs.nix-ld.enable = true;
-  networking.hostName = lib.mkForce "bealish";
+  networking.hostName = lib.mkForce "${host.name}";
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

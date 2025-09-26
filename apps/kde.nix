@@ -1,0 +1,16 @@
+# @nix-config-modules
+{
+  nix-config.apps.kde = {
+    nixos =
+      { pkgs, ... }:
+      {
+        services = {
+          desktopManager.plasma6.enable = true;
+          displayManager.sddm.enable = true;
+          displayManager.sddm.wayland.enable = true;
+        };
+      };
+
+    tags = [ "kde" ];
+  };
+}
