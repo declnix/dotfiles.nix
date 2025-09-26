@@ -5,11 +5,19 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ lib, ... }:
+{
+  host,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
+  users.users.${host.username}.shell = pkgs.zsh;
+  programs.zsh.enable = true;
+
   wsl.enable = true;
-  wsl.defaultUser = "nixos";
+  wsl.defaultUser = "${host.username}";
   programs.nix-ld.enable = true;
   networking.hostName = lib.mkForce "bealish";
 
