@@ -29,7 +29,7 @@ git clone https://github.com/declnix/nix-config.git
 cd nix-config
 sudo nixos-rebuild switch --flake .#<hostname>
 ```
-Replace `<hostname>` with your target host as defined in `nix/hosts/`.
+Replace `<hostname>` with your target host as defined in `hosts/`.
 
 ## Usage
 
@@ -37,10 +37,12 @@ Replace `<hostname>` with your target host as defined in `nix/hosts/`.
   `sudo nixos-rebuild switch --flake .#<hostname>`
 - **Test config changes:**  
   `sudo nixos-rebuild test --flake .#<hostname>`
+- **Regenerate macros:**  
+  `nix run ".#eval-macros"`
 - **Apps/modules:**  
-  Find and edit individual app modules in `nix/apps/`.
+  Find and edit individual app modules in `apps/`.
 - **Hosts:**  
-  Find and edit host-specific configs in `nix/hosts/`.
+  Find and edit host-specific configs in `hosts/`.
 
 ## Credits
 

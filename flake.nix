@@ -23,13 +23,17 @@
     nix-config-modules.url = "github:chadac/nix-config-modules";
 
     ##############################
+    # Apps
+    ##############################
+    nvf.url = "github:notashelf/nvf";
+    nzf.url = "github:yehvaed/nzf";
+
+    ##############################
     # Extra Utilities & Tools
     ##############################
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    nvf.url = "github:notashelf/nvf";
-    nzf.url = "github:yehvaed/nzf";
     git-hooks.url = "github:cachix/git-hooks.nix";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
