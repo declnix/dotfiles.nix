@@ -17,7 +17,7 @@
 
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  networking.hostName = lib.mkForce "${host.name}";
+  networking.hostName = lib.mkForce host.name;
   time.timeZone = "Europe/Warsaw";
 
   users.users.${host.username} = {
