@@ -1,6 +1,8 @@
 # @nix-config-modules
 {
   nix-config.apps.kde = {
+    enable = false;
+
     nixos =
       { pkgs, ... }:
       {
@@ -10,7 +12,5 @@
           displayManager.sddm.wayland.enable = true;
         };
       };
-
-    tags = [ "kde" ];
   };
 }

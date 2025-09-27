@@ -23,10 +23,18 @@
     nix-config-modules.url = "github:chadac/nix-config-modules";
 
     ##############################
-    # Apps
+    # Cli Apps
     ##############################
     nvf.url = "github:notashelf/nvf";
     nzf.url = "github:yehvaed/nzf";
+
+    ##############################
+    # Desktop Environment
+    ##############################
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     ##############################
     # Extra Utilities & Tools

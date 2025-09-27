@@ -24,6 +24,11 @@
       niri = true;
     };
 
+    nix-config.apps = {
+      kde.enable = true;
+      niri.enable = true;
+    };
+
     nixos = import ./configuration.nix;
     home = import ./home.nix;
   };

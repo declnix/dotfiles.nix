@@ -1,17 +1,42 @@
 # @nix-config-modules
+{ inputs, ... }:
+let
+  inherit (inputs) niri;
+in
 {
-  nix-config.apps.niri = {
-    nixos =
-      { pkgs, ... }:
-      {
-        programs.niri.enable = true;
-        environment.systemPackages = with pkgs; [
-          fuzzel
-          alacritty
-        ];
-
+  nix-config = {
+    apps.niri = {
+      home = {
+        programs.niri.settings = { };
       };
 
-    tags = [ "niri" ];
+      nixos =
+        { pkgs, ... }:
+        2 {
+          programs.niri = {
+            enable = true;
+            package = pkgs.niri;
+          };
+
+          environment.systemPackages = with pkgs; [
+            fuzzel
+            alacritty
+          ];
+        };
+
+      nixpkgs = {
+        params.overlays = [
+          niri.overlays.niri
+        ];
+      };
+    };
+
+    modules = {
+      nixos = [
+        #* niri modules add also home-manager module to all users
+        niri.nixosModules.niri
+      ];
+    };
   };
+
 }
