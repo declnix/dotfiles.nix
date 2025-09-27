@@ -18,13 +18,10 @@
 
       # == ui, styles
       appearance = true;
-
-      # ==> desktop
-      kde = true;
-      niri = true;
     };
 
     nix-config.apps = {
+      # ==> desktop
       kde.enable = true;
       niri.enable = true;
     };

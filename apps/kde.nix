@@ -1,8 +1,6 @@
 # @nix-config-modules
 {
   nix-config.apps.kde = {
-    enable = false;
-
     nixos =
       { pkgs, ... }:
       {

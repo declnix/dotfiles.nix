@@ -12,7 +12,7 @@ in
 
       nixos =
         { pkgs, ... }:
-        2 {
+        {
           programs.niri = {
             enable = true;
             package = pkgs.niri;
