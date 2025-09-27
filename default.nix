@@ -4,6 +4,7 @@ let
 
   modules = [
     # /imports :: grep -rl '# @nix-config-modules' | grep -E 'apps|hosts' | sort
+    apps/ags.nix
     apps/devbox.nix
     apps/direnv.nix
     apps/distrobox.nix

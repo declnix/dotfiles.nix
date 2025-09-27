@@ -6,20 +6,24 @@ in
 {
   nix-config = {
     apps.ags = {
-      home = {
-        programs.ags = {
-          enable = true;
+      enable = false;
 
-          # symlink to ~/.config/ags
-          configDir = ../ags;
+      home =
+        { pkgs, ... }:
+        {
+          programs.ags = {
+            enable = true;
 
-          # additional packages and executables to add to gjs's runtime
-          extraPackages = with pkgs; [
-            inputs.astal.packages.${pkgs.system}.battery
-            fzf
-          ];
+            # symlink to ~/.config/ags
+            configDir = ../ags;
+
+            # # additional packages and executables to add to gjs's runtime
+            # extraPackages = with pkgs; [
+            #   astal.packages.${pkgs.system}.battery
+            #   fzf
+            # ];
+          };
         };
-      };
     };
 
     modules = {
