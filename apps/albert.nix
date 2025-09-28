@@ -2,7 +2,7 @@
 { lib, ... }:
 {
   nix-config.apps.albert = {
-    enable = true;
+    enable = false;
     home =
       { pkgs, ... }:
       {

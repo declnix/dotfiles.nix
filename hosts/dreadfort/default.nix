@@ -24,6 +24,8 @@
       # ==> desktop
       kde.enable = true;
       niri.enable = true;
+      ags.enable = true;
+      alacritty.enable = true;
     };
 
     nixos = import ./configuration.nix;
