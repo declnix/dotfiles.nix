@@ -26,6 +26,7 @@ let
     apps/sudo.nix
     apps/tmux.nix
     apps/vscode-server.nix
+    apps/zoxide.nix
     hosts/bealish/default.nix
     hosts/dreadfort/default.nix
     # /imports
