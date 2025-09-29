@@ -38,7 +38,7 @@ Replace `<hostname>` with your target host as defined in `hosts/`.
 - **Test config changes:**  
   `sudo nixos-rebuild test --flake .#<hostname>`
 - **Regenerate macros:**  
-  `nix run ".#eval-macros"`
+  `./eval-macros.sh`
 - **Apps/modules:**  
   Find and edit individual app modules in `apps/`.
 - **Hosts:**  

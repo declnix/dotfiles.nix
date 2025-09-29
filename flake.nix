@@ -27,6 +27,7 @@
     ##############################
     nvf.url = "github:notashelf/nvf";
     nzf.url = "github:yehvaed/nzf";
+    lacy.url = "github:timothebot/lacy";
 
     ##############################
     # Desktop Environment

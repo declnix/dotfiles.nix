@@ -17,6 +17,7 @@ let
     apps/gh.nix
     apps/git.nix
     apps/kde.nix
+    apps/lacy.nix
     apps/niri.nix
     apps/nix-index.nix
     apps/nvf/nvf.nix
@@ -60,39 +61,6 @@ let
       pre-commit.settings.hooks.nixfmt-rfc-style.enable = true;
 
       formatter = pkgs.nixfmt-rfc-style;
-      apps.eval-macros = {
-        type = "app";
-        program = pkgs.writeShellScriptBin "eval-macros" ''
-          grep -rlE '^ *# */[^ ]* *::' . --include '*.nix' | while read -r file; do
-            dir=$(dirname "$file")
-            base=$(basename "$file")
-
-            (
-              cd "$dir" || exit 1
-              ${pkgs.perl}/bin/perl -i -pe '
-                if (/^(\s*)# \/[^ ]* :: (.*)$/) {
-                  print $_;
-                  $indent = $1;
-                  $cmd = $2;
-                  chomp($cmd);
-                  @out = `$cmd`;
-                  print map { "$indent$_" } @out;
-                  $_ = "";
-                  $in = 1;
-                }
-                elsif ($in && /^(\s*)# \/[^ ]*$/) {
-                  $in = 0;
-                  print $_;
-                  $_ = "";
-                }
-                elsif ($in) {
-                  $_ = "";
-                }
-              ' "$base"
-            )
-          done
-        '';
-      };
     };
 
   flake = {
