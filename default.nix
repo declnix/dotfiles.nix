@@ -3,7 +3,7 @@ let
   inherit (inputs) flake-parts;
 
   modules = [
-    # /imports :: grep -rl '# @nix-config-modules' | grep -E 'apps|hosts' | sort
+    # @macro :: grep -rl '# @nix-config-modules' | grep -E 'apps|hosts' | sort
     apps/ags.nix
     apps/alacritty.nix
     apps/albert.nix
@@ -30,7 +30,7 @@ let
     apps/zoxide.nix
     hosts/bealish/default.nix
     hosts/dreadfort/default.nix
-    # /imports
+    # @end
   ];
 
   perSystem =
