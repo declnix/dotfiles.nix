@@ -29,9 +29,9 @@
           }
 
           focus-ring {
-            off
+            width 2
+            active-color "#00ff00BF" 
           }
-
            
           shadow {
             on

@@ -14,7 +14,7 @@
 
         home.packages = [ pkgs.lacy ];
         programs.zsh.initContent = ''
-          eval "$(${pkgs.lacy} init zsh --custom-fuzzy ${pkgs.fzf})"
+          eval "$(${pkgs.lacy}/bin/lacy init zsh --custom-fuzzy ${pkgs.fzf})"
         '';
       };
 
