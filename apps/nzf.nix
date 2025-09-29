@@ -23,7 +23,7 @@
               '';
 
               defer = true;
-              after = [ zsh-vi-mode ];
+              after = [ "zsh-vi-mode" ];
 
               extraPackages = [ fzf ];
             };
@@ -55,7 +55,7 @@
                 source ${oh-my-zsh}/share/oh-my-zsh/themes/robbyrussell.zsh-theme
               '';
 
-              after = [ zsh-f-sy-h ];
+              after = [ "zsh-f-sy-h" ];
             };
           };
           enable = true;
@@ -90,6 +90,6 @@
   };
 
   nix-config.modules.home-manager = [
-    inputs.nzf.homeManagerModules.default
+    inputs.nzf.homeModules.default
   ];
 }

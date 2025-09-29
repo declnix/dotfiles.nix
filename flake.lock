@@ -725,11 +725,11 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1756679156,
-        "narHash": "sha256-Qzl04+tU1/W6jrivPVjVUVzxLV15vLoW9SVuMWFDv6E=",
+        "lastModified": 1759180984,
+        "narHash": "sha256-+CbbQt0YOlWsc3uDn5P0L8xnCyfYQfjmEfoHv32Dutc=",
         "owner": "yehvaed",
         "repo": "nzf",
-        "rev": "6e151a2101848e2a40da3cb5354b9f4c0a9cb871",
+        "rev": "f949a8fa81a79ea57655216dad0e2548013417ab",
         "type": "github"
       },
       "original": {
