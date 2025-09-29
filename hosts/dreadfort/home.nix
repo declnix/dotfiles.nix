@@ -22,6 +22,29 @@
           Mod+V       { toggle-window-floating; }
         }
 
+        window-rule {
+            match is-active=true
+
+              focus-ring {
+                active-color "#f38ba8"
+                inactive-color "#7d0d2d"
+            }
+
+            border {
+                inactive-color "#7d0d2d"
+            }
+
+            shadow {
+                color "#7d0d2d70"
+                spread 2
+            }
+
+            tab-indicator {
+                active-color "#f38ba8"
+                inactive-color "#7d0d2d"
+            }
+        }
+
         layout {
           struts {
             // leave place for ags panel
@@ -35,9 +58,9 @@
            
           shadow {
             on
-            softness 30
+            softness 15
             spread 5
-            offset x=0 y=5
+            offset x=0 y=1
             color "#0007"
           }
         }
