@@ -28,8 +28,8 @@ let
     apps/tmux.nix
     apps/vscode-server.nix
     apps/zoxide.nix
+    hosts/bl4ck0ut/default.nix
     hosts/d34dsh1p/default.nix
-    hosts/dreadfort/default.nix
     # @end
   ];
 

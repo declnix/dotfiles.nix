@@ -1,7 +1,7 @@
 # @nix-config-modules
 { lib, ... }:
 {
-  nix-config.hosts.dreadfort = rec {
+  nix-config.hosts.bl4ck0ut = rec {
     kind = "nixos";
     system = "x86_64-linux";
 
