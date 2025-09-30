@@ -28,7 +28,7 @@ let
     apps/tmux.nix
     apps/vscode-server.nix
     apps/zoxide.nix
-    hosts/bealish/default.nix
+    hosts/d34dsh1p/default.nix
     hosts/dreadfort/default.nix
     # @end
   ];

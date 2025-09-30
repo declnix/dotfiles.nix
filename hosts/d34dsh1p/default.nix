@@ -1,7 +1,7 @@
 # @nix-config-modules
 { inputs, lib, ... }:
 {
-  nix-config.hosts.bealish = rec {
+  nix-config.hosts.d34dsh1p = rec {
     kind = "nixos";
     system = "x86_64-linux";
 
