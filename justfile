@@ -6,6 +6,7 @@ GREEN := '\033[1;32m'
 RESET := '\033[0m'
 
 # Show available commands
+[private]
 default:
     @just --list
 
@@ -29,25 +30,26 @@ build *ARGS: eval-macros
 
 
 # Remove old generations (5+ days)
+[private]
 clean:
     @sudo nix-collect-garbage --delete-older-than 5d
 
 # Format Nix files
+[private]
 fmt:
     @nixfmt **/*.nix
 
 # Evaluate macros and stage changes
+[private]
 eval-macros:
-    #!/usr/bin/env bash
-    changed_files=$(./eval-macros.sh)
-    if [ -n "$changed_files" ]; then
-        echo "$changed_files" | xargs git add
-    fi
+    @./eval-macros.sh | xargs -r git add
 
 # Log message helper
+[private]
 log text:
     @echo -e "{{BLUE}}▸{{RESET}} {{text}}"
 
 # Success message helper
+[private]
 success text:
     @echo -e "{{GREEN}}✓{{RESET}} {{text}}"
