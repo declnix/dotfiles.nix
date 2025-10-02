@@ -5,15 +5,6 @@
     home =
       { pkgs, ... }:
       {
-        imports = [
-          # @macro :: find . -iname '*.nix' | grep -Ev '(nvf|overlay)\.nix' | sort
-          ./config/languages/markdown.nix
-          ./config/ui.nix
-          ./plugins/fyler.nix
-          ./plugins/fzf-lua.nix
-          # @end
-        ];
-
         programs.nvf = {
           settings = {
             vim = {
@@ -31,6 +22,10 @@
         home.sessionVariables = {
           EDITOR = "nvim";
         };
+
+        imports = [
+          ./modules
+        ];
       };
 
     nixos = {

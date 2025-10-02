@@ -42,7 +42,7 @@ fmt:
 # Evaluate macros and stage changes
 [private]
 eval-macros:
-    @./eval-macros.sh | xargs -r git add
+    @./scripts/eval-macros.sh | xargs -r git add
 
 # Log message helper
 [private]
