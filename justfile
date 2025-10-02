@@ -12,7 +12,7 @@ default:
 
 # Apply system configuration with optional extra args
 switch *ARGS: eval-macros
-    @just log "Applying NixOS configuration for {{hostname}}"
+    @just log "Applying NixOS configuration [host={{hostname}}]"
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     @sudo nixos-rebuild switch --flake ".#{{hostname}}" {{ARGS}}
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -21,7 +21,7 @@ switch *ARGS: eval-macros
 
 # Build configuration with optional extra args
 build *ARGS: eval-macros
-    @just log "Building system configuration for {{hostname}}"
+    @just log "Building system configuration [host={{hostname}}]"
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     @sudo nixos-rebuild build --flake ".#{{hostname}}" {{ARGS}}
     @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
