@@ -1,6 +1,6 @@
-# nix-config
+# @declnix's dotfiles
 
-> ⚡️ Personal NixOS configuration repo, powered by flakes. Modular, reproducible, and easy to maintain, I guess xD.
+> ⚡️ Personal NixOS configuration repo, powered by flakes. Modular, reproducible, and easy to maintain, I hope xD.
 
 ## Overview
 
@@ -9,10 +9,9 @@ This repository contains my NixOS system configuration, designed for modularity 
 ## Structure
 
 - **flake.nix / flake.lock:** Flake entry point and lockfile for reproducibility.
-- **default.nix / imports.nix:** Core configuration and module imports.
-- **nix/apps/**: Modules for individual applications and tools.
-- **nix/hosts/**: Host-specific system configurations.
-- **nix/defaultTags.nix:** Default tag definitions for config modularity.
+- **default.nix / modules.nix:** Core configuration and module imports.
+- **apps/**: Modules for individual applications and tools.
+- **hosts/**: Host-specific system configurations.
 
 ## Getting Started
 
@@ -35,8 +34,6 @@ Replace `<hostname>` with your target host as defined in `hosts/`.
 
 - **Rebuild system:**  
   `sudo nixos-rebuild switch --flake .#<hostname>`
-- **Test config changes:**  
-  `sudo nixos-rebuild test --flake .#<hostname>`
 - **Regenerate macros:**  
   `./eval-macros.sh`
 - **Apps/modules:**  
