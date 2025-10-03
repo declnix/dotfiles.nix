@@ -7,49 +7,49 @@ RESET := '\033[0m'
 
 # Show available commands
 [private]
-default:
-    @just --list
+@default:
+    just --list
 
 # Apply system configuration with optional extra args
-switch *ARGS: eval-macros
-    @just log "Applying NixOS configuration [host={{hostname}}]"
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @sudo nixos-rebuild switch --flake ".#{{hostname}}" {{ARGS}}
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo 
-    @just success "Configuration activated and running"
+@switch *ARGS: eval-macros
+    just log "Applying NixOS configuration [host={{hostname}}]"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    sudo nixos-rebuild switch --flake ".#{{hostname}}" {{ARGS}}
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo 
+    just success "Configuration activated and running"
 
 # Build configuration with optional extra args
-build *ARGS: eval-macros
-    @just log "Building system configuration [host={{hostname}}]"
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @sudo nixos-rebuild build --flake ".#{{hostname}}" {{ARGS}}
-    @echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    @echo
-    @just success "Build complete → ./result"
+@build *ARGS: eval-macros
+    just log "Building system configuration [host={{hostname}}]"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    sudo nixos-rebuild build --flake ".#{{hostname}}" {{ARGS}}
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo
+    just success "Build complete → ./result"
 
 
 # Remove old generations (5+ days)
 [private]
-clean:
-    @sudo nix-collect-garbage --delete-older-than 5d
+@clean:
+    sudo nix-collect-garbage --delete-older-than 5d
 
 # Format Nix files
 [private]
-fmt:
-    @nixfmt **/*.nix
+@fmt:
+    nixfmt **/*.nix
 
 # Evaluate macros and stage changes
 [private]
-eval-macros:
-    @./scripts/eval-macros.sh | xargs -r git add
+@eval-macros:
+    ./eval-macros.sh | xargs -r git add
 
 # Log message helper
 [private]
-log text:
-    @echo -e "{{BLUE}}▸{{RESET}} {{text}}"
+@log text:
+    echo -e "{{BLUE}}▸{{RESET}} {{text}}"
 
 # Success message helper
 [private]
-success text:
-    @echo -e "{{GREEN}}✓{{RESET}} {{text}}"
+@success text:
+    echo -e "{{GREEN}}✓{{RESET}} {{text}}"

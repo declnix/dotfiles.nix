@@ -18,7 +18,6 @@
     ./apps/lacy.nix
     ./apps/niri.nix
     ./apps/nix-index.nix
-    ./apps/nvf/nvf.nix
     ./apps/nzf.nix
     ./apps/podman.nix
     ./apps/ripgrep.nix

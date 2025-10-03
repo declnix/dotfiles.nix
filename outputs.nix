@@ -56,7 +56,7 @@ let
       )
     ]
     ++ [
-      ./modules
+      ./modules.nix
     ];
 
     nix-config.homeApps = [ ];

@@ -1,4 +1,4 @@
-# @nix-config-modules
+# @nix-config-modules @skip
 { inputs, ... }:
 {
   nix-config.apps.nvf = {
@@ -24,7 +24,7 @@
         };
 
         imports = [
-          ./modules
+          ./modules.nix
         ];
       };
 

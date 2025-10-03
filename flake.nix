@@ -58,5 +58,5 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = inputs: import ./. { inherit inputs; };
+  outputs = inputs: import ./outputs.nix { inherit inputs; };
 }
