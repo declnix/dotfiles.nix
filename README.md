@@ -1,4 +1,4 @@
-# @declnix's dotfiles
+# @declnix's nix config
 
 > ⚡️ Personal NixOS configuration repo, powered by flakes. Modular, reproducible, and easy to maintain, I hope xD.
 
