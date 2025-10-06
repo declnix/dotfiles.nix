@@ -27,6 +27,7 @@
     ./apps/zoxide.nix
     ./hosts/bl4ck0ut/default.nix
     ./hosts/d34dsh1p/default.nix
+    ./hosts/l4p0stv01d/default.nix
     # @end
   ];
 }

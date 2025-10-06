@@ -1,3 +1,4 @@
+# Hostname from env or fallback
 hostname := env_var_or_default('HOSTNAME', `hostname`)
 
 # Color codes
@@ -5,31 +6,39 @@ BLUE := '\033[1;34m'
 GREEN := '\033[1;32m'
 RESET := '\033[0m'
 
-# Show available commands
+# Default: list commands
 [private]
 @default:
     just --list
 
-# Apply system configuration with optional extra args
+# Apply system configuration
 @switch *ARGS: eval-macros
     just log "Applying NixOS configuration [host={{hostname}}]"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    sudo nixos-rebuild switch --flake ".#{{hostname}}" {{ARGS}}
+    impure_flag=""; \
+    if [ -r "./hosts/{{hostname}}" ] && grep -qr "@impure" "./hosts/{{hostname}}"; then \
+        impure_flag="--impure"; \
+    fi; \
+    sudo -E nixos-rebuild switch --flake ".#{{hostname}}" $impure_flag {{ARGS}}
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo 
-    just success "Configuration activated and running"
+    echo
+    just log "Configuration activated and running {{GREEN}}✓{{RESET}}"
 
-# Build configuration with optional extra args
+
+# Build configuration
 @build *ARGS: eval-macros
     just log "Building system configuration [host={{hostname}}]"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    sudo nixos-rebuild build --flake ".#{{hostname}}" {{ARGS}}
+    impure_flag=""; \
+    if [ -r "./hosts/{{hostname}}" ] && grep -qr "@impure" "./hosts/{{hostname}}"; then \
+        impure_flag="--impure"; \
+    fi; \
+    sudo -E nixos-rebuild build --flake ".#{{hostname}}" $impure_flag {{ARGS}}
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo
-    just success "Build complete → ./result"
+    just log "Build complete → ./result {{GREEN}}✓{{RESET}}"
 
-
-# Remove old generations (5+ days)
+# Clean old generations
 [private]
 @clean:
     sudo nix-collect-garbage --delete-older-than 5d
@@ -39,17 +48,17 @@ RESET := '\033[0m'
 @fmt:
     nixfmt **/*.nix
 
-# Evaluate macros and stage changes
+# Evaluate macros
 [private]
 @eval-macros:
     ./eval-macros.sh | xargs -r git add
 
-# Log message helper
+# Logging
 [private]
 @log text:
     echo -e "{{BLUE}}▸{{RESET}} {{text}}"
 
-# Success message helper
+# Success
 [private]
 @success text:
     echo -e "{{GREEN}}✓{{RESET}} {{text}}"
