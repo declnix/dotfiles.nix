@@ -15,11 +15,7 @@ RESET := '\033[0m'
 @switch *ARGS: eval-macros
     just log "Applying NixOS configuration [host={{hostname}}]"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    impure_flag=""; \
-    if [ -r "./hosts/{{hostname}}" ] && grep -qr "@impure" "./hosts/{{hostname}}"; then \
-        impure_flag="--impure"; \
-    fi; \
-    sudo -E nixos-rebuild switch --flake ".#{{hostname}}" $impure_flag {{ARGS}}
+    just nixos-rebuild switch {{ARGS}}
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo
     just log "Configuration activated and running {{GREEN}}✓{{RESET}}"
@@ -29,14 +25,21 @@ RESET := '\033[0m'
 @build *ARGS: eval-macros
     just log "Building system configuration [host={{hostname}}]"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    just nixos-rebuild build {{ARGS}}
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo
+    just log "Build complete → ./result {{GREEN}}✓{{RESET}}"
+
+
+# helpers
+[private]
+@nixos-rebuild command *ARGS:
     impure_flag=""; \
     if [ -r "./hosts/{{hostname}}" ] && grep -qr "@impure" "./hosts/{{hostname}}"; then \
         impure_flag="--impure"; \
     fi; \
-    sudo -E nixos-rebuild build --flake ".#{{hostname}}" $impure_flag {{ARGS}}
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo
-    just log "Build complete → ./result {{GREEN}}✓{{RESET}}"
+    sudo -E nixos-rebuild {{command}} --flake ".#{{hostname}}" $impure_flag {{ARGS}}
+
 
 # Clean old generations
 [private]
@@ -57,8 +60,3 @@ RESET := '\033[0m'
 [private]
 @log text:
     echo -e "{{BLUE}}▸{{RESET}} {{text}}"
-
-# Success
-[private]
-@success text:
-    echo -e "{{GREEN}}✓{{RESET}} {{text}}"
