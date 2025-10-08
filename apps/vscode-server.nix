@@ -16,7 +16,7 @@
         };
       };
 
-    tags = [ "wsl" ];
+    tags = [ "wsl@vscode" ];
   };
 
   nix-config.modules.nixos = [

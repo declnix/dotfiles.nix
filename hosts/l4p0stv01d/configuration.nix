@@ -16,28 +16,7 @@ in
 {
   users.users.${host.username}.shell = pkgs.zsh;
   programs.zsh.enable = true;
-
-  wsl.enable = true;
-  wsl.defaultUser = "${host.username}";
   programs.nix-ld.enable = true;
-  networking.hostName = lib.mkForce host.name;
-
-  # Global environment variables for proxy
-  environment.variables = {
-    http_proxy = httpProxy;
-    https_proxy = httpsProxy;
-    no_proxy = noProxy;
-  };
-
-  networking.proxy = {
-    inherit httpProxy httpsProxy;
-  };
-
-  systemd.services."nix-daemon".environment = {
-    HTTP_PROXY = httpProxy;
-    HTTPS_PROXY = httpsProxy;
-    NO_PROXY = noProxy;
-  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -20,7 +20,8 @@
       appearance = true;
 
       # # ==> misc
-      # wsl = true;
+      wsl = true;
+      proxy = true;
     };
 
     nix-config.apps = {

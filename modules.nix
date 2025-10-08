@@ -14,16 +14,19 @@
     ./apps/fzf.nix
     ./apps/gh.nix
     ./apps/git.nix
+    ./apps/host.nix
     ./apps/kde.nix
     ./apps/lacy.nix
     ./apps/niri.nix
     ./apps/nix-index.nix
     ./apps/nzf.nix
     ./apps/podman.nix
+    ./apps/proxy.nix
     ./apps/ripgrep.nix
     ./apps/sudo.nix
     ./apps/tmux.nix
     ./apps/vscode-server.nix
+    ./apps/wsl.nix
     ./apps/zoxide.nix
     ./hosts/bl4ck0ut/default.nix
     ./hosts/d34dsh1p/default.nix
