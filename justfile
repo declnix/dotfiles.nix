@@ -38,7 +38,7 @@ RESET := '\033[0m'
     if [ -r "./hosts/{{hostname}}" ] && grep -qr "@impure" "./hosts/{{hostname}}"; then \
         impure_flag="--impure"; \
     fi; \
-    sudo -E nixos-rebuild {{command}} --flake ".#{{hostname}}" $impure_flag {{ARGS}}
+    sudo -E -H nixos-rebuild {{command}} --flake ".#{{hostname}}" $impure_flag {{ARGS}}
 
 
 # Clean old generations
