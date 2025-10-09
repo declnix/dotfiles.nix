@@ -1,34 +1,69 @@
-# @nix-config-modules @impure
+# @nix-config-modules
+{ lib, ... }:
 let
-  # Use proxy settings from the shell environment at evaluation time.
-  # These must be exported before running `nixos-rebuild`.
-  httpProxy = builtins.getEnv "http_proxy";
-  httpsProxy = builtins.getEnv "https_proxy";
-  noProxy = builtins.getEnv "no_proxy";
+  inherit (lib) mkOption types;
+
+  proxyType = types.submodule {
+    options = {
+      httpProxy = mkOption {
+        type = types.str;
+        default = "";
+        description = "HTTP proxy URL";
+      };
+      httpsProxy = mkOption {
+        type = types.str;
+        default = "";
+        description = "HTTPS proxy URL";
+      };
+      noProxy = mkOption {
+        type = types.str;
+        default = "";
+        description = "Comma-separated list of hosts to exclude from proxying";
+      };
+    };
+  };
+
+  hostType = types.submodule {
+    options = {
+      networking = mkOption {
+        default = { };
+        type = proxyType;
+      };
+    };
+  };
 in
 {
-  nix-config.apps.proxy = {
-    nixos =
-      { host, ... }:
-      {
-        # Global environment variables for proxy
-        environment.variables = {
-          http_proxy = httpProxy;
-          https_proxy = httpsProxy;
-          no_proxy = noProxy;
-        };
+  options = {
+    nix-config.hosts = mkOption {
+      type = types.attrsOf hostType;
+    };
+  };
 
-        networking.proxy = {
-          inherit httpProxy httpsProxy;
-        };
+  config = {
+    nix-config.apps.proxy = {
+      nixos =
+        { host, ... }:
+        let
+          inherit (host.networking) httpProxy httpsProxy noProxy;
+        in
+        {
+          # Global environment variables for proxy
+          environment.variables = lib.mkIf (httpProxy != "") {
+            inherit httpProxy httpsProxy noProxy;
+          };
 
-        systemd.services."nix-daemon".environment = {
-          HTTP_PROXY = httpProxy;
-          HTTPS_PROXY = httpsProxy;
-          NO_PROXY = noProxy;
-        };
-      };
+          networking.proxy = lib.mkIf (httpProxy != "") {
+            default = httpProxy;
+            inherit httpsProxy noProxy;
+          };
 
-    tags = [ "proxy" ];
+          systemd.services."nix-daemon".environment = lib.mkIf (httpProxy != "") {
+            HTTP_PROXY = httpProxy;
+            HTTPS_PROXY = httpsProxy;
+            NO_PROXY = noProxy;
+          };
+        };
+      tags = [ "proxy" ];
+    };
   };
 }

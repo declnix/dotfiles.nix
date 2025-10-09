@@ -1,4 +1,4 @@
-# @nix-config-modules @impure
+# @nix-config-modules @proxy
 { inputs, lib, ... }:
 {
   nix-config.hosts.l4p0stv01d = rec {
@@ -9,24 +9,29 @@
     homeDirectory = "/home/${username}";
 
     tags = {
-      # # ==> apps for development
+      # ==> apps for development
       development = true;
       containers = true;
 
-      # # ==> policies
+      # ==> policies
       passwordless = true;
 
-      # # == ui, styles
+      # == ui, styles
       appearance = true;
 
-      # # ==> misc
+      # ==> misc
       wsl = true;
       proxy = true;
     };
 
     nix-config.apps = {
-      # ==> desktop
       nvf.enable = false;
+    };
+
+    networking = {
+      httpProxy = "http://192.168.16.1:9000";
+      httpsProxy = "http://192.168.16.1:9000";
+      noProxy = "127.0.0.1,localhost,intra.laposte.fr,gitlab.net.extra.laposte.fr";
     };
 
     nixos = import ./configuration.nix;

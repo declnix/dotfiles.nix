@@ -34,11 +34,7 @@ RESET := '\033[0m'
 # helpers
 [private]
 @nixos-rebuild command *ARGS:
-    impure_flag=""; \
-    if [ -r "./hosts/{{hostname}}" ] && grep -qr "@impure" "./hosts/{{hostname}}"; then \
-        impure_flag="--impure"; \
-    fi; \
-    sudo -E -H nixos-rebuild {{command}} --flake ".#{{hostname}}" $impure_flag {{ARGS}}
+    sudo -E -H nixos-rebuild {{command}} --flake ".#{{hostname}}" {{ARGS}}
 
 
 # Clean old generations
