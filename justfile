@@ -1,6 +1,11 @@
 # Hostname from env or fallback
 hostname := env_var_or_default('HOSTNAME', `hostname`)
 
+# Detect impure mode from host file marker
+# Looks for "@impure" in the corresponding host definition
+impure_flag := if `grep -q '@impure' hosts/{{hostname}}.nix 2>/dev/null && echo true || echo false` == 'true' { '--impure' } else { '' }
+
+
 # Color codes
 BLUE := '\033[1;34m'
 GREEN := '\033[1;32m'
@@ -34,7 +39,7 @@ RESET := '\033[0m'
 # helpers
 [private]
 @nixos-rebuild command *ARGS:
-    sudo -E -H nixos-rebuild {{command}} --flake ".#{{hostname}}" {{ARGS}}
+    sudo -E -H nixos-rebuild {{command}} --flake ".#{{hostname}}"  {{impure_flag}} {{ARGS}}
 
 
 # Clean old generations

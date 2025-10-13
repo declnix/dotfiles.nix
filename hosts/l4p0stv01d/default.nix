@@ -1,5 +1,8 @@
-# @nix-config-modules @proxy
+# @nix-config-modules @proxy @impure
 { inputs, lib, ... }:
+let
+  inherit (builtins) getEnv;
+in
 {
   nix-config.hosts.l4p0stv01d = rec {
     kind = "nixos";
@@ -29,9 +32,9 @@
     };
 
     networking = {
-      httpProxy = "http://192.168.16.1:9000";
-      httpsProxy = "http://192.168.16.1:9000";
-      noProxy = "127.0.0.1,localhost,intra.laposte.fr,gitlab.net.extra.laposte.fr";
+      httpProxy = getEnv "HTTP_PROXY";
+      httpsProxy = getEnv "HTTPS_PROXY";
+      noProxy = getEnv "NO_PROXY";
     };
 
     nixos = import ./configuration.nix;
