@@ -1,3 +1,4 @@
+# @plugins
 {
   programs.nvf.settings.vim = {
     languages.markdown = {

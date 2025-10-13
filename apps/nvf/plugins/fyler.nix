@@ -1,3 +1,4 @@
+# @plugins
 { pkgs, ... }:
 {
   programs.nvf.settings.vim = {

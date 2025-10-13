@@ -1,4 +1,4 @@
-# @nix-config-modules @skip
+# @nix-config-modules
 { inputs, ... }:
 {
   nix-config.apps.nvf = {

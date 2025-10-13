@@ -1,4 +1,3 @@
-# @skip
 { inputs, ... }:
 final: prev:
 let
