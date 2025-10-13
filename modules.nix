@@ -1,7 +1,10 @@
 # @skip
 {
   imports = [
-    # @macro :: grep -rl '@nix-config-modules' . | xargs grep -L '@skip' | sort
+    # @macro :: \
+    #   grep -rl '@nix-config-modules' . \
+    #   | xargs grep -L '@skip' \
+    #   | sort
     ./apps/ags.nix
     ./apps/alacritty.nix
     ./apps/albert.nix

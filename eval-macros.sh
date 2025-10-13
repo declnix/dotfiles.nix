@@ -1,54 +1,53 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p perl gnugrep coreutils
 
-# Find files with @macro markers
 grep -rlE '@macro ::' . | grep -v eval-macros.sh | while read -r file; do
   dir=$(dirname "$file")
   base=$(basename "$file")
-  
+
   (
     cd "$dir" || exit 1
-    
+
     perl -i -pe '
-      BEGIN { 
-        $in_block = 0; 
-      }
-      
-      # Found @macro line - execute command and insert output
-      if (/^(\s*)# \@macro :: (.+)$/) {
+      BEGIN { $in_block = 0 }
+
+      if (!$in_block && /^(\s*)# \@macro :: (.*)$/) {
         my $indent = $1;
         my $cmd = $2;
+        my $macro = $_; # store the full macro text as we go
+
+        while ($cmd =~ /\\\s*$/) {
+          my $next = <>;
+          last unless defined $next;
+          $macro .= $next; # keep this line in the file
+          $next =~ s/^\s*#\s*//;  # strip leading "#"
+          $cmd =~ s/\\\s*$//;
+          $cmd .= " $next";
+        }
+
         chomp($cmd);
-        
-        # Execute command and capture output
         my @out = `$cmd 2>&1`;
-        
-        # Keep the @macro line
-        $_ = $_;
-        
-        # Append each output line with proper indentation
+
+        my $out = $macro; # start with original macro block
         foreach my $line (@out) {
           chomp($line);
-          $_ .= "${indent}$line\n";
+          $out .= "${indent}$line\n";
         }
-        
+
+        $_ = $out;
         $in_block = 1;
         next;
       }
-      
-      # Found @end line - exit block mode
-      if ($in_block && /^\s*# \@end/) {
-        $in_block = 0;
-        next;
-      }
-      
-      # Inside block - remove old content
+
       if ($in_block) {
-        $_ = "";
-        next;
+        if (/^\s*# \@end/) {
+          $in_block = 0;
+        } else {
+          $_ = "";  # clear generated region
+        }
       }
     ' "$base"
   )
-  
+
   echo "$file"
 done
