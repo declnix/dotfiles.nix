@@ -19,7 +19,7 @@ in
       # ==> policies
       passwordless = true;
 
-      # == ui, styles
+      # ==> ui, styles
       appearance = true;
 
       # ==> misc
@@ -31,10 +31,15 @@ in
       nvf.enable = false;
     };
 
-    networking = {
-      httpProxy = getEnv "HTTP_PROXY";
-      httpsProxy = getEnv "HTTPS_PROXY";
-      noProxy = getEnv "NO_PROXY";
+    proxy = {
+      enabled = true;
+
+      protocols = {
+        http = getEnv "HTTP_PROXY";
+        https = getEnv "HTTPS_PROXY";
+      };
+
+      exclude = getEnv "NO_PROXY";
     };
 
     nixos = import ./configuration.nix;

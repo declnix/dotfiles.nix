@@ -1,33 +1,51 @@
 # @nix-config-modules
 { lib, ... }:
 let
-  inherit (lib) mkOption types;
+  inherit (lib) mkOption types mkIf;
+
+  proxyProtocolsType = types.submodule {
+    options = {
+      http = mkOption {
+        type = types.str;
+        default = "";
+        description = "HTTP proxy URL for this host.";
+      };
+      https = mkOption {
+        type = types.str;
+        default = "";
+        description = "HTTPS proxy URL for this host.";
+      };
+    };
+  };
 
   proxyType = types.submodule {
     options = {
-      httpProxy = mkOption {
-        type = types.str;
-        default = "";
-        description = "HTTP proxy URL";
+      enabled = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to enable proxy configuration.";
       };
-      httpsProxy = mkOption {
-        type = types.str;
-        default = "";
-        description = "HTTPS proxy URL";
+
+      protocols = mkOption {
+        type = proxyProtocolsType;
+        default = { };
+        description = "Proxy URLs per protocol.";
       };
-      noProxy = mkOption {
+
+      exclude = mkOption {
         type = types.str;
         default = "";
-        description = "Comma-separated list of hosts to exclude from proxying";
+        description = "Comma-separated list of hosts to bypass proxying.";
       };
     };
   };
 
   hostType = types.submodule {
     options = {
-      networking = mkOption {
-        default = { };
+      proxy = mkOption {
         type = proxyType;
+        default = { };
+        description = "Proxy configuration for this host.";
       };
     };
   };
@@ -36,6 +54,7 @@ in
   options = {
     nix-config.hosts = mkOption {
       type = types.attrsOf hostType;
+      description = "Host definitions with optional proxy configuration.";
     };
   };
 
@@ -44,23 +63,27 @@ in
       nixos =
         { host, ... }:
         let
-          inherit (host.networking) httpProxy httpsProxy noProxy;
+          inherit (host.proxy) enabled protocols bypass;
+          http = protocols.http or "";
+          https = protocols.https or "";
         in
-        {
-          # Global environment variables for proxy
-          environment.variables = lib.mkIf (httpProxy != "") {
-            inherit httpProxy httpsProxy noProxy;
+        mkIf enabled {
+          environment.variables = {
+            http_proxy = http;
+            https_proxy = https;
+            no_proxy = bypass;
           };
 
-          networking.proxy = lib.mkIf (httpProxy != "") {
-            default = httpProxy;
-            inherit httpsProxy noProxy;
+          networking.proxy = {
+            default = http;
+            inherit https;
+            noProxy = bypass;
           };
 
-          systemd.services."nix-daemon".environment = lib.mkIf (httpProxy != "") {
-            HTTP_PROXY = httpProxy;
-            HTTPS_PROXY = httpsProxy;
-            NO_PROXY = noProxy;
+          systemd.services."nix-daemon".environment = {
+            HTTP_PROXY = http;
+            HTTPS_PROXY = https;
+            NO_PROXY = bypass;
           };
         };
       tags = [ "proxy" ];
